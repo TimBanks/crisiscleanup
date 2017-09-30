@@ -6,9 +6,9 @@ module Legacy
     # before_validation :geocode, if: -> (obj) { obj.latitude.nil? or obj.longitude.nil? or obj.address_changed? }
     before_validation :create_blurred_geocoordinates
     before_validation :add_case_number
+    before_validation :detect_duplicates
     before_save :calculate_metaphones
     before_save :calculate_request_date
-    before_create :detect_duplicates
     belongs_to :legacy_event
     belongs_to :legacy_organization, foreign_key: :claimed_by
     belongs_to :reporting_org, class_name: "Legacy::LegacyOrganization", foreign_key: :reported_by
